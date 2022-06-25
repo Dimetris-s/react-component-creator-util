@@ -1,0 +1,7 @@
+{
+    "relPath": "components",
+    "defaultExt": ".css",
+    "enableModule": false,
+    "enableTypescript": true,
+    "createCss": true
+}
