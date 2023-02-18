@@ -1,23 +1,50 @@
-const returnJsx = ({ styleFile, fileName, styleModule }) => {
-  if(!styleFile) {
-    return `<div>${fileName}</div>`
+const rootClassName = ({classnames, styleModule}) => {
+  if(styleModule && classnames) {
+    return `{cn(styles.root, className)}`
+  } else if(!styleModule && classnames) {
+    return `{cn("root", className)}`
+  } else if(!classnames && styleModule) {
+    return `{styles.root}`
+  } else if(!styleModule && !classnames) {
+    return `"root"`
   }
-  return `<div className=${styleModule ? "{styles.wrapper}" : '"wrapper"'}>${fileName}</div>`
+}
+
+const returnJsx = ({ styleFile, fileName, styleModule, classnames }) => {
+  if(!styleFile) {
+    return `
+      <div>
+          ${fileName}
+      </div>`
+  }
+  return `
+      <div className=${rootClassName({classnames, styleModule})}>
+          ${fileName}
+      </div>`
+}
+
+const componentInitialization = ({ fileName, styleModule, typescript, styleFile, classnames, memo }) => {
+  if(memo) {
+    return `
+export const ${fileName} = memo(({ className }${typescript ? `:${fileName}Props` : ''}) => {
+  return (${returnJsx({ styleFile, fileName, styleModule, classnames })}
+  );
+});`
+  }
+  return `
+export const ${fileName} = ({ className }${typescript ? `:${fileName}Props` : ''}) => {
+  return (${returnJsx({ styleFile, fileName, styleModule, classnames })}
+  );
+};`
 }
 
 
-const  jsxTemplate = ({ fileName, styleExt, styleModule, typescript, styleFile }) =>
-`import React${typescript ? ", {FC}" : ""} from 'react';
-${styleFile ? `import ${styleModule ? "styles from": ""} './${fileName}${styleModule ? ".module": ""}${styleExt}';` : ''}
+const  jsxTemplate = ({ fileName, styleExt, styleModule, typescript, styleFile, classnames, memo }) =>
+`${memo ? `import { memo } from 'react';\n` : ''}${classnames ? `import cn from 'classnames';\n`: ''}${styleFile ? `import ${styleModule ? "styles from": ""} './${fileName}${styleModule ? ".module": ""}${styleExt}';` : ''}
 ${typescript ? `
-interface Props {
-  
+interface ${fileName}Props {
+  className?: string;
 }
-` : ''}
-const ${fileName}${typescript ? ":FC<Props>" : ""} = ({}) => {
-	return ${returnJsx({ styleFile, fileName, styleModule })};
-};
-
-export default ${fileName};
+` : ''}${componentInitialization({ fileName, styleModule, typescript, styleFile, classnames, memo })}
 `
 module.exports = {jsxTemplate}

@@ -6,7 +6,9 @@ const { logger, types } = require('./logger');
 const settingsMap = {
   'enableModule': 'Style modules',
   'enableTypescript': 'Typescript',
-  'createCss': 'Creating css file'
+  'createCss': 'Creating css file',
+  'enableCn': 'import classNames and wrap root className',
+  'memoComponent': 'Wrap component with memo',
 }
 
 module.exports = {

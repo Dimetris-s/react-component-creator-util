@@ -13,7 +13,7 @@ module.exports = {
     const dir = path.resolve(initialPath, settings.relPath, name);
     const fileName = path.parse(dir).name;
 
-    const { styleExt, styleModule, typescript, styleFile } = program.opts();
+    const { styleExt, styleModule, typescript, styleFile, classnames, memo } = program.opts();
 
     const jsxExt = typescript ? '.tsx' : '.jsx';
     const indexExt = typescript ? '.ts' : '.js';
@@ -23,7 +23,7 @@ module.exports = {
     const indexFilePath = path.resolve(dir, `index${indexExt}`);
 
     await fs.mkdir(dir, { recursive: true });
-    await fs.writeFile(jsxFilePath, jsxTemplate({ fileName, styleExt, styleModule, typescript, styleFile }));
+    await fs.writeFile(jsxFilePath, jsxTemplate({ fileName, styleExt, styleModule, typescript, styleFile, classnames, memo }));
     if(styleFile) {
       await fs.writeFile(styleFilePath, styleTemplate());
     }

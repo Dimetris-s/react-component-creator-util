@@ -23,6 +23,8 @@ program.option('-se, --style-ext <ext>', 'Set extention for styles file', settin
 program.option('-m, --style-module', 'Enable style module', settings.enableModule);
 program.option('-ts, --typescript', 'Enable typescript', settings.enableTypescript);
 program.option('-s, --style-file', 'Create style file', settings.createCss);
+program.option('-cn, --classnames', 'Add import classnames', settings.enableCn);
+program.option('-m, --memo', 'Wrap component with memo', settings.memoComponent);
 
 program.command('dest <dest>').description('Set realtive path').action(async (dest) => {
   const envFile = await fs.readFile(settingsPath, { encoding: 'utf-8' });
@@ -49,7 +51,9 @@ program.command('reset').description('Reset settings').action(async () => {
     "defaultExt": ".css",
     "enableModule": false,
     "enableTypescript": false,
-    "createCss": false
+    "createCss": false,
+    "memoComponent": false,
+    "enableCn": false
 }`);
   logger(chalk.yellowBright('RC settings was cleared!'), types.INFO)
 });
@@ -63,13 +67,19 @@ program.command('info').description('Get state info').action(() => {
   logger(`Create style file: ${getColoredBooleanMessage(settings.createCss)}`, types.INFO);
   logger(`Enable style module: ${getColoredBooleanMessage(settings.enableModule)}`, types.INFO);
   logger(`Enable Typescript: ${getColoredBooleanMessage(settings.enableTypescript)}`, types.INFO);
+  logger(`Wrap component with memo: ${getColoredBooleanMessage(settings.memoComponent)}`, types.INFO);
+  logger(`Enable classnames: ${getColoredBooleanMessage(settings.enableCn)}`, types.INFO);
 });
 
 program.command('module <bool>').description('Enable/disable module style file').action(toggleSetting('enableModule'));
 
+
 program.command('typescript <bool>').description('Enable/disable typescript').action(toggleSetting('enableTypescript'));
 
-program.command('css <bool>').description('Enable/disable creating style file').action(toggleSetting('createCss', true));
+program.command('css <bool>').description('Enable/disable creating style file').action(toggleSetting('createCss'));
 
+program.command('memo <bool>').description('Enable/disable wrapping component with memo').action(toggleSetting('memoComponent'));
+
+program.command('cn <bool>').description('Enable/disable classNames lib import').action(toggleSetting('enableCn', true));
 
 program.parse();

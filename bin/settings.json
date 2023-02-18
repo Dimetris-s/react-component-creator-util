@@ -1,7 +1,9 @@
 {
     "relPath": "components",
-    "defaultExt": ".css",
-    "enableModule": false,
+    "defaultExt": ".scss",
+    "enableModule": true,
     "enableTypescript": true,
-    "createCss": true
+    "createCss": true,
+    "memoComponent": true,
+    "enableCn": true
 }
