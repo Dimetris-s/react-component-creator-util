@@ -1,7 +1,7 @@
-
+const defaultSettings = `
  {
     "component": {
-        "relPath": "src/components",
+        "relPath": "",
         "defaultExt": ".css",
         "enableModule": false,
         "enableTypescript": false,
@@ -10,7 +10,6 @@
         "enableCn": false
     },
     "slice": {
-        "srcPath": "",
         "withModel": false,
         "withApi": false,
         "withSelector": false,
@@ -18,3 +17,6 @@
         "withExtraReducers": false
     }
 }
+`
+
+module.exports = {defaultSettings}
