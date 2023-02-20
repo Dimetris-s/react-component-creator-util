@@ -41,6 +41,13 @@ program.command('dest <dest>').description('Set realtive path').action(async (de
   logger(`A path for components has been changed to ${chalk.yellowBright(path.resolve(process.env.PWD, dest))}`, types.INFO);
 });
 
+program.command('src <dest>').description('Set src project path').action(async (dest) => {
+  const envFile = await fs.readFile(settingsPath, { encoding: 'utf-8' });
+  const newData = envFile.replace(/\"srcPath\": \S+,/, `"srcPath": "${dest}",`);
+  await fs.writeFile(settingsPath, newData);
+  logger(`A path for src folder has been changed to ${chalk.yellowBright(path.resolve(process.env.PWD, dest))}`, types.INFO);
+});
+
 program.command('style-ext <ext>').description('Set default style extention').action(async ext => {
   const styleRE = /^\.?(css|s[ac]ss|less)$/;
   if(!styleRE.test(ext)) {
@@ -60,10 +67,11 @@ program.command('reset').description('Reset settings').action(async () => {
 
 program.command('create <name>').description('Create React Component').action(createComponent(initialPath));
 program.command('c <name>').description('Create React Component').action(createComponent(initialPath));
-program.command('slice <layer> <sliceName>').description('Create Slice').action(createSlice);
-program.command('sl <layer> <sliceName>').description('Create Slice').action(createSlice);
+program.command('slice <layer> <sliceName>').description('Create Slice').action(createSlice(initialPath));
+program.command('sl <layer> <sliceName>').description('Create Slice').action(createSlice(initialPath));
 
 program.command('info').description('Get state info').action(() => {
+  logger(`${chalk.cyanBright('Component settings:')}`, types.INFO);
   logger(`Style extention: ${chalk.magentaBright(settings.component.defaultExt)}`, types.INFO);
   logger(`Path: ${chalk.yellowBright(settings.component.relPath)}`, types.INFO);
   logger(`Create style file: ${getColoredBooleanMessage(settings.component.createCss)}`, types.INFO);
@@ -71,17 +79,28 @@ program.command('info').description('Get state info').action(() => {
   logger(`Enable Typescript: ${getColoredBooleanMessage(settings.component.enableTypescript)}`, types.INFO);
   logger(`Wrap component with memo: ${getColoredBooleanMessage(settings.component.memoComponent)}`, types.INFO);
   logger(`Enable classnames: ${getColoredBooleanMessage(settings.component.enableCn)}`, types.INFO);
+  logger(`${chalk.yellowBright('====================')}`, types.INFO);
+  logger(`${chalk.cyanBright('Slice settings:')}`, types.INFO);
+  logger(`Src folder: ${chalk.yellowBright(settings.slice.srcPath)}`, types.INFO);
+  logger(`With Model: ${getColoredBooleanMessage(settings.slice.withModel)}`, types.INFO);
+  logger(`With Api: ${getColoredBooleanMessage(settings.slice.withApi)}`, types.INFO);
+  logger(`With Selector: ${getColoredBooleanMessage(settings.slice.withSelector)}`, types.INFO);
+  logger(`With UseActions: ${getColoredBooleanMessage(settings.slice.withUseActions)}`, types.INFO);
+  logger(`With ExtraReducers: ${getColoredBooleanMessage(settings.slice.withExtraReducers)}`, types.INFO);
+
+
 });
 
 program.command('module <bool>').description('Enable/disable module style file').action(toggleSetting('enableModule'));
-
-
 program.command('typescript <bool>').description('Enable/disable typescript').action(toggleSetting('enableTypescript'));
-
 program.command('css <bool>').description('Enable/disable creating style file').action(toggleSetting('createCss'));
-
 program.command('memo <bool>').description('Enable/disable wrapping component with memo').action(toggleSetting('memoComponent'));
-
 program.command('cn <bool>').description('Enable/disable classNames lib import').action(toggleSetting('enableCn', true));
+
+program.command('model <bool>').description('Enable/disable adding model to slice').action(toggleSetting('withModel'));
+program.command('api <bool>').description('Enable/disable creating rtk api').action(toggleSetting('withApi'));
+program.command('selector <bool>').description('Enable/disable creating base selector').action(toggleSetting('withSelector'));
+program.command('actions <bool>').description('Enable/disable useActions export from slice').action(toggleSetting('withUseActions'));
+program.command('reducers <bool>').description('Enable/disable adding extra reducers template').action(toggleSetting('withExtraReducers', true));
 
 program.parse();
