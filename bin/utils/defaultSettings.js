@@ -10,6 +10,7 @@ const defaultSettings = `
         "enableCn": false
     },
     "slice": {
+        "srcPath": "",
         "withModel": false,
         "withApi": false,
         "withSelector": false,
