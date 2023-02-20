@@ -9,6 +9,12 @@ const settingsMap = {
   'createCss': 'Creating css file',
   'enableCn': 'import classNames and wrap root className',
   'memoComponent': 'Wrap component with memo',
+
+  'withModel': 'Enable/disable adding model to slice',
+  'withApi': 'Enable/disable creating rtk api',
+  'withSelector': 'Enable/disable creating base selector',
+  'withUseActions': 'Enable/disable useActions export from slice',
+  'withExtraReducers': 'Enable/disable adding extra reducers template',
 }
 
 module.exports = {

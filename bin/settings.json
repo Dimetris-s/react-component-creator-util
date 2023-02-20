@@ -1,9 +1,20 @@
-{
-    "relPath": "src",
-    "defaultExt": ".scss",
-    "enableModule": true,
-    "enableTypescript": true,
-    "createCss": true,
-    "memoComponent": true,
-    "enableCn": true
+
+ {
+    "component": {
+        "relPath": "src/components",
+        "defaultExt": ".scss",
+        "enableModule": true,
+        "enableTypescript": true,
+        "createCss": true,
+        "memoComponent": true,
+        "enableCn": true
+    },
+    "slice": {
+        "srcPath": "src",
+        "withModel": true,
+        "withApi": true,
+        "withSelector": true,
+        "withUseActions": true,
+        "withExtraReducers": false
+    }
 }
