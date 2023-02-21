@@ -1,2 +1,3 @@
-const indexTemplate = (fileName) => `export { ${fileName} } from './${fileName}';`
+const indexTemplate = (fileName) =>
+`export { ${fileName} } from './${fileName}';`
 module.exports = {indexTemplate}

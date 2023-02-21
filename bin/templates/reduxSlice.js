@@ -3,8 +3,8 @@ const { firstLetterToLowerCase } = require('../utils/firstLetterToLowerCase');
 const reduxSliceTemplate = ({ sliceName, useActions, extraReducers }) => {
   const typeName = firstLetterToUpperCase(sliceName);
   const nameOfSlice = firstLetterToLowerCase(sliceName);
-  return `
-import { PayloadAction${useActions ? '' : ', createSlice'} } from '@reduxjs/toolkit';
+  return (
+`import { PayloadAction${useActions ? '' : ', createSlice'} } from '@reduxjs/toolkit';
 ${useActions ? `import { buildSlice } from '@/shared/lib/utils/buildSlice';` : ''}
 import { ${typeName}Schema } from '../types/${sliceName}Schema';
 
@@ -38,7 +38,7 @@ export const ${nameOfSlice}Slice = ${useActions ? 'buildSlice': 'createSlice'}({
 
 export const { reducer: ${firstLetterToLowerCase(sliceName)}Reducer } = ${nameOfSlice}Slice;
 ${useActions ? `export const { useActions: use${firstLetterToUpperCase(sliceName)}Actions } = ${nameOfSlice}Slice;` : `export const { actions: ${nameOfSlice}Actions } = ${nameOfSlice}Slice`}
-`;
+`);
 };
 
 module.exports = { reduxSliceTemplate };

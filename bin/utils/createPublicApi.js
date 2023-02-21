@@ -7,9 +7,9 @@ const createPublicApi = async ({slicePath, sliceName, withModel}) => {
   try {
     await fs.writeFile(
       path.resolve(slicePath, 'index.ts'),
-      `export { ${ componentName } } from './ui/${componentName}';
-      ${withModel ? `export type { ${componentName}Schema } from './model/types/${sliceName}Schema';`: ''}
-      `
+`export { ${ componentName } } from './ui/${componentName}';
+${withModel ? `export type { ${componentName}Schema } from './model/types/${sliceName}Schema';`: ''}
+`
     )
   } catch(e) {
     console.log('Cannot create public api', e);

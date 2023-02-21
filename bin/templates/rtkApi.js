@@ -1,7 +1,7 @@
 const { firstLetterToUpperCase } = require('../utils/firstLetterToUpperCase');
 const { firstLetterToLowerCase } = require('../utils/firstLetterToLowerCase');
-const rtkApiTemplate = ({ sliceName }) => `
-import { rtkApi } from '@/shared/api/rtkApi';
+const rtkApiTemplate = ({ sliceName }) =>
+`import { rtkApi } from '@/shared/api/rtkApi';
 
 const ${firstLetterToLowerCase(sliceName)}Api = rtkApi.injectEndpoints({
   endpoints: (build) => ({
