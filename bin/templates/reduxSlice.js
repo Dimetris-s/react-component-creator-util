@@ -6,7 +6,7 @@ const reduxSliceTemplate = ({ sliceName, useActions, extraReducers }) => {
   return (
 `import { PayloadAction${useActions ? '' : ', createSlice'} } from '@reduxjs/toolkit';
 ${useActions ? `import { buildSlice } from '@/shared/lib/utils/buildSlice';` : ''}
-import { ${typeName}Schema } from '../types/${sliceName}Schema';
+import { ${typeName}Schema } from '../types/${nameOfSlice}Schema';
 
 const initialState:${typeName}Schema = {
   
