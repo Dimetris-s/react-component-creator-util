@@ -1,9 +1,19 @@
 {
-    "relPath": "src",
+  "component": {
+    "relPath": "src/entities/Profile/ui",
     "defaultExt": ".scss",
     "enableModule": true,
     "enableTypescript": true,
     "createCss": true,
     "memoComponent": true,
     "enableCn": true
+  },
+  "slice": {
+    "srcPath": "src",
+    "withModel": true,
+    "withApi": false,
+    "withSelector": false,
+    "withUseActions": false,
+    "withExtraReducers": false
+  }
 }

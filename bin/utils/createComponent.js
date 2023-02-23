@@ -10,7 +10,7 @@ const { logger, types } = require('./logger');
 
 module.exports = {
   createComponent: (initialPath) => async (name) => {
-    const dir = path.resolve(initialPath, settings.relPath, name);
+    const dir = path.resolve(initialPath, settings.component.relPath, name);
     const fileName = path.parse(dir).name;
 
     const { styleExt, styleModule, typescript, styleFile, classnames, memo } = program.opts();
