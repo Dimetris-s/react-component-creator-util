@@ -1,6 +1,6 @@
 {
   "component": {
-    "relPath": "src",
+    "relPath": "src/entities/Profile/ui",
     "defaultExt": ".scss",
     "enableModule": true,
     "enableTypescript": true,
@@ -12,8 +12,8 @@
     "srcPath": "src",
     "withModel": true,
     "withApi": false,
-    "withSelector": true,
-    "withUseActions": true,
+    "withSelector": false,
+    "withUseActions": false,
     "withExtraReducers": false
   }
 }
