@@ -1,5 +1,5 @@
 {
-    "relPath": "components",
+    "relPath": "src",
     "defaultExt": ".scss",
     "enableModule": true,
     "enableTypescript": true,
