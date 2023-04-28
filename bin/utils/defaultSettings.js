@@ -7,6 +7,7 @@ const defaultSettings = `
         "enableTypescript": false,
         "createCss": false,
         "memoComponent": false,
+        "story": false,
         "enableCn": false
     },
     "slice": {

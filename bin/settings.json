@@ -1,16 +1,17 @@
 {
   "component": {
-    "relPath": "src/entities/Profile/ui",
+    "relPath": "src/shared/test",
     "defaultExt": ".scss",
     "enableModule": true,
     "enableTypescript": true,
     "createCss": true,
     "memoComponent": true,
+    "story": true,
     "enableCn": true
   },
   "slice": {
     "srcPath": "src",
-    "withModel": true,
+    "withModel": false,
     "withApi": false,
     "withSelector": false,
     "withUseActions": false,
