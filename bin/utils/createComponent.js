@@ -20,7 +20,7 @@ module.exports = {
     const indexExt = typescript ? '.ts' : '.js';
 
     const jsxFilePath = path.resolve(dir, `${fileName}${jsxExt}`);
-    const storiesFilePath = path.resolve(dir, `${fileName}.stories.${jsxExt}`);
+    const storiesFilePath = path.resolve(dir, `${fileName}.stories${jsxExt}`);
     const styleFilePath = path.resolve(dir, `${fileName}${styleModule ? '.module' : ''}${styleExt}`);
     const indexFilePath = path.resolve(dir, `index${indexExt}`);
 
