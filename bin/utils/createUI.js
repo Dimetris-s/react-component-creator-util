@@ -4,9 +4,10 @@ const { firstLetterToUpperCase } = require('./firstLetterToUpperCase');
 const { jsxTemplate } = require('../templates/jsx');
 const { styleTemplate } = require('../templates/style');
 const { indexTemplate } = require('../templates/indexFileTemplate');
+const { storiesTemplate } = require('../templates/storyTemplate');
 
 const createUI = async ({sliceName, slicePath, componentOptions}) => {
-  const { styleExt, styleModule, typescript, styleFile, classnames, memo } = componentOptions;
+  const { styleExt, styleModule, typescript, styleFile, classnames, memo, story } = componentOptions;
 
   const uiPath = (...segments) => path.resolve(slicePath, 'ui', ...segments);
   const componentName = firstLetterToUpperCase(sliceName);
@@ -39,6 +40,18 @@ const createUI = async ({sliceName, slicePath, componentOptions}) => {
       console.log('Cannot create component', e);
     }
   }
+
+  const createStory = async () => {
+    const jsxExt = typescript ? '.tsx' : '.jsx'
+    try {
+      await fs.writeFile(
+        uiPath(componentName, `${componentName}.stories${jsxExt}`),
+        storiesTemplate({fileName: componentName, typescript})
+      )
+    } catch(e) {
+      console.log('Cannot create story', e);
+    }
+  }
   const createStyleFile = async () => {
     try {
       await fs.writeFile(
@@ -63,6 +76,9 @@ const createUI = async ({sliceName, slicePath, componentOptions}) => {
   }
   await createFolderStructure();
   await createComponent();
+  if(story) {
+    await createStory();
+  }
   if(styleFile) {
     await createStyleFile();
   }

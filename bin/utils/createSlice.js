@@ -40,7 +40,7 @@ const createSlice = (initPath) => async (layer, sliceName) => {
     await createModel({slicePath, sliceName, sliceOptions})
   }
   await createUI({slicePath, sliceName, componentOptions})
-  await createPublicApi({slicePath, sliceName, withModel})
+  await createPublicApi({slicePath, sliceName, withModel, typescript: componentOptions.typescript})
 
 
   logger(`Slice ${chalk.whiteBright.bold(sliceName)} has been successfully created in ${chalk.whiteBright.bold(layer)} layer!`, types.SUCCESS);

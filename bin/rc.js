@@ -27,6 +27,7 @@ program.option('-ts, --typescript', 'Enable typescript', settings.component.enab
 program.option('-s, --style-file', 'Create style file', settings.component.createCss);
 program.option('-cn, --classnames', 'Add import classnames', settings.component.enableCn);
 program.option('-m, --memo', 'Wrap component with memo', settings.component.memoComponent);
+program.option('-st, --story', 'Create storybook story', settings.component.story);
 
 program.option('-wm, --with-model', 'Enable model directory in slice', settings.slice.withModel);
 program.option('-wa, --with-api', 'Enable creating rtk api file', settings.slice.withApi);
@@ -78,6 +79,7 @@ program.command('info').description('Get state info').action(() => {
   logger(`Enable style module: ${getColoredBooleanMessage(settings.component.enableModule)}`, types.INFO);
   logger(`Enable Typescript: ${getColoredBooleanMessage(settings.component.enableTypescript)}`, types.INFO);
   logger(`Wrap component with memo: ${getColoredBooleanMessage(settings.component.memoComponent)}`, types.INFO);
+  logger(`Create storybook story: ${getColoredBooleanMessage(settings.component.story)}`, types.INFO);
   logger(`Enable classnames: ${getColoredBooleanMessage(settings.component.enableCn)}`, types.INFO);
   logger(`${chalk.yellowBright('====================')}`, types.INFO);
   logger(`${chalk.cyanBright('Slice settings:')}`, types.INFO);
@@ -95,6 +97,7 @@ program.command('module <bool>').description('Enable/disable module style file')
 program.command('typescript <bool>').description('Enable/disable typescript').action(toggleSetting('enableTypescript'));
 program.command('css <bool>').description('Enable/disable creating style file').action(toggleSetting('createCss'));
 program.command('memo <bool>').description('Enable/disable wrapping component with memo').action(toggleSetting('memoComponent'));
+program.command('story <bool>').description('Enable/disable storybook file creating').action(toggleSetting('story'));
 program.command('cn <bool>').description('Enable/disable classNames lib import').action(toggleSetting('enableCn', true));
 
 program.command('model <bool>').description('Enable/disable adding model to slice').action(toggleSetting('withModel'));
