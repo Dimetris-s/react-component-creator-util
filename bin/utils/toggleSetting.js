@@ -8,6 +8,7 @@ const settingsMap = {
   'enableTypescript': 'Typescript',
   'createCss': 'Creating css file',
   'enableCn': 'import classNames and wrap root className',
+  'story': 'Story file creating',
   'memoComponent': 'Wrap component with memo',
 
   'withModel': 'Enable/disable adding model to slice',
