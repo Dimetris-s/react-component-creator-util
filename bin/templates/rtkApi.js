@@ -13,9 +13,13 @@ const ${firstLetterToLowerCase(sliceName)}Api = rtkApi.injectEndpoints({
   }),
 });
 
-export const use${firstLetterToUpperCase(sliceName)} = ${firstLetterToLowerCase(sliceName)}Api.useGet${firstLetterToUpperCase(sliceName)}Query;
+export const {
+  useGet${firstLetterToUpperCase(sliceName)}Query,
+  endpoints: {
+    get${firstLetterToUpperCase(sliceName)},
+  },
+} = ${firstLetterToLowerCase(sliceName)}Api;
 
-export const { get${firstLetterToUpperCase(sliceName)} } = ${firstLetterToLowerCase(sliceName)}Api.endpoints;
 `;
 
 module.exports = { rtkApiTemplate };

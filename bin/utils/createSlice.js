@@ -7,6 +7,7 @@ const { createUI } = require('./createUI');
 const { createPublicApi } = require('./createPublicApi');
 const { logger, types } = require('./logger');
 const settings = require('../settings.json');
+const {createRtkApi} = require("./createApi");
 
 const createSlice = (initPath) => async (layer, sliceName) => {
   if(!layer || !sliceName) {
@@ -19,10 +20,10 @@ const createSlice = (initPath) => async (layer, sliceName) => {
     throw new Error(`Incorrect layer name, available layers: ${layers.map(layer => chalk.cyanBright(layer)).join(' or ')}!`)
   }
 
-  const { withModel, withUseActions, withApi, withSelector, withExtraReducers, ...componentOptions } = program.opts();
+  const { withModel, withUseActions, withApi, withSelector, withExtraReducers, useModelDirectories, ...componentOptions } = program.opts();
   const srcPath = settings.slice.srcPath
   const sliceOptions = {
-    withModel, withUseActions, withApi, withSelector, withExtraReducers, srcPath
+    withModel, withUseActions, withApi, withSelector, withExtraReducers, useModelDirectories, srcPath
   }
   if(!srcPath) {
     throw new Error('Src path not found!');
@@ -35,11 +36,13 @@ const createSlice = (initPath) => async (layer, sliceName) => {
   } catch (e) {
     console.log('Cannot create slice dir', e);
   }
-
+  if(withApi) {
+    await createRtkApi({slicePath, sliceName});
+  }
   if(withModel) {
     await createModel({slicePath, sliceName, sliceOptions})
   }
-  await createUI({slicePath, sliceName, componentOptions})
+  await createUI({slicePath, sliceName, componentOptions, layer})
   await createPublicApi({slicePath, sliceName, withModel, typescript: componentOptions.typescript})
 
 

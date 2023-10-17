@@ -15,6 +15,8 @@ const settingsMap = {
   'withSelector': 'Enable/disable creating base selector',
   'withUseActions': 'Enable/disable useActions export from slice',
   'withExtraReducers': 'Enable/disable adding extra reducers template',
+  'useModelDirectories': 'Enable/disable wrap model segments to directories',
+  'story': 'Enable/disable creating storybook file',
 }
 
 module.exports = {

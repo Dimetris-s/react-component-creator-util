@@ -1,20 +1,21 @@
 {
   "component": {
-    "relPath": "src/shared/test",
+    "relPath": "src/features/SendFeedback/ui",
     "defaultExt": ".scss",
     "enableModule": true,
     "enableTypescript": true,
     "createCss": true,
     "memoComponent": true,
-    "story": true,
+    "story": false,
     "enableCn": true
   },
   "slice": {
     "srcPath": "src",
-    "withModel": false,
-    "withApi": false,
-    "withSelector": false,
-    "withUseActions": false,
-    "withExtraReducers": false
+    "withModel": true,
+    "withApi": true,
+    "withSelector": true,
+    "withUseActions": true,
+    "useModelDirectories": false,
+    "withExtraReducers": true
   }
 }
