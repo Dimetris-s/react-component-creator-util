@@ -1,10 +1,10 @@
-const storiesTemplate = ({ fileName, typescript }) => {
+const storiesTemplate = ({ fileName, typescript, slice }) => {
     return (
 
 `${typescript ? `import type { Meta, StoryObj } from '@storybook/react';\n` : ''}import { ${fileName} } from './${fileName}';
 
 const meta${typescript ? `: Meta<typeof ${fileName}>` : ''} = {
-  title: 'Example/${fileName}',
+  title: '${slice || 'Example'}/${fileName}',
   component: ${fileName},
   tags: ['autodocs'],
   argTypes: {},

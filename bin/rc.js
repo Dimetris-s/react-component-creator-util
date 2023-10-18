@@ -34,6 +34,7 @@ program.option('-wa, --with-api', 'Enable creating rtk api file', settings.slice
 program.option('-ws, --with-selector', 'Enable creating selector file', settings.slice.withSelector);
 program.option('-wua, --with-use-actions', 'Enable use actions export in slice', settings.slice.withUseActions);
 program.option('-wer, --with-extra-reducers', 'Add extra reducers template in slice', settings.slice.withExtraReducers);
+program.option('-umd, --use-model-directories', 'Add model directories', settings.slice.useModelDirectories);
 
 program.command('dest <dest>').description('Set realtive path').action(async (dest) => {
   const envFile = await fs.readFile(settingsPath, { encoding: 'utf-8' });
@@ -89,6 +90,7 @@ program.command('info').description('Get state info').action(() => {
   logger(`With Selector: ${getColoredBooleanMessage(settings.slice.withSelector)}`, types.INFO);
   logger(`With UseActions: ${getColoredBooleanMessage(settings.slice.withUseActions)}`, types.INFO);
   logger(`With ExtraReducers: ${getColoredBooleanMessage(settings.slice.withExtraReducers)}`, types.INFO);
+  logger(`Use model directories: ${getColoredBooleanMessage(settings.slice.useModelDirectories)}`, types.INFO);
 
 
 });
@@ -104,6 +106,7 @@ program.command('model <bool>').description('Enable/disable adding model to slic
 program.command('api <bool>').description('Enable/disable creating rtk api').action(toggleSetting('withApi'));
 program.command('selector <bool>').description('Enable/disable creating base selector').action(toggleSetting('withSelector'));
 program.command('actions <bool>').description('Enable/disable useActions export from slice').action(toggleSetting('withUseActions'));
+program.command('model-dirs <bool>').description('Enable/disable model directories').action(toggleSetting('useModelDirectories'));
 program.command('reducers <bool>').description('Enable/disable adding extra reducers template').action(toggleSetting('withExtraReducers', true));
 
 program.parse();

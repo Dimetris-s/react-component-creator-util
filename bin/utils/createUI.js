@@ -6,7 +6,7 @@ const { styleTemplate } = require('../templates/style');
 const { indexTemplate } = require('../templates/indexFileTemplate');
 const { storiesTemplate } = require('../templates/storyTemplate');
 
-const createUI = async ({sliceName, slicePath, componentOptions}) => {
+const createUI = async ({sliceName, slicePath, componentOptions, layer}) => {
   const { styleExt, styleModule, typescript, styleFile, classnames, memo, story } = componentOptions;
 
   const uiPath = (...segments) => path.resolve(slicePath, 'ui', ...segments);
@@ -41,12 +41,12 @@ const createUI = async ({sliceName, slicePath, componentOptions}) => {
     }
   }
 
-  const createStory = async () => {
+  const createStory = async ({layer}) => {
     const jsxExt = typescript ? '.tsx' : '.jsx'
     try {
       await fs.writeFile(
         uiPath(componentName, `${componentName}.stories${jsxExt}`),
-        storiesTemplate({fileName: componentName, typescript})
+        storiesTemplate({fileName: componentName, typescript, slice: layer})
       )
     } catch(e) {
       console.log('Cannot create story', e);
@@ -77,7 +77,7 @@ const createUI = async ({sliceName, slicePath, componentOptions}) => {
   await createFolderStructure();
   await createComponent();
   if(story) {
-    await createStory();
+    await createStory({layer});
   }
   if(styleFile) {
     await createStyleFile();

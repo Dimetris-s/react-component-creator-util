@@ -16,6 +16,7 @@ const defaultSettings = `
         "withApi": false,
         "withSelector": false,
         "withUseActions": false,
+        "useModelDirectories": false,
         "withExtraReducers": false
     }
 }
