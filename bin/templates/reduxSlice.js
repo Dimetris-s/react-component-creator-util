@@ -1,12 +1,12 @@
 const { firstLetterToUpperCase } = require('../utils/firstLetterToUpperCase');
 const { firstLetterToLowerCase } = require('../utils/firstLetterToLowerCase');
-const reduxSliceTemplate = ({ sliceName, useActions, extraReducers }) => {
+const reduxSliceTemplate = ({ sliceName, useActions, extraReducers, useModelDirectories }) => {
   const typeName = firstLetterToUpperCase(sliceName);
   const nameOfSlice = firstLetterToLowerCase(sliceName);
   return (
 `import { PayloadAction${useActions ? '' : ', createSlice'} } from '@reduxjs/toolkit';
 ${useActions ? `import { buildSlice } from '@/shared/lib/utils/buildSlice';` : ''}
-import { ${typeName}Schema } from '../types/${nameOfSlice}Schema';
+import { ${typeName}Schema } from ${useModelDirectories ? `'../types/${nameOfSlice}Schema'` : `'./${nameOfSlice}Schema'`};
 
 const initialState:${typeName}Schema = {
   

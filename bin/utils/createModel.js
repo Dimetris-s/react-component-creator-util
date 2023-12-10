@@ -32,7 +32,8 @@ const createModel = async ({ sliceName, slicePath, sliceOptions }) => {
         reduxSliceTemplate({
           sliceName,
           useActions: withUseActions,
-          extraReducers: withExtraReducers
+          extraReducers: withExtraReducers,
+          useModelDirectories
         })
       );
     } catch(e) {

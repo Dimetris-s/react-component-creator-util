@@ -1,6 +1,6 @@
 {
   "component": {
-    "relPath": "src/features/SendFeedback/ui",
+    "relPath": "src/views/AboutView/ui/page-components",
     "defaultExt": ".scss",
     "enableModule": true,
     "enableTypescript": true,
@@ -11,11 +11,11 @@
   },
   "slice": {
     "srcPath": "src",
-    "withModel": true,
-    "withApi": true,
+    "withModel": false,
+    "withApi": false,
     "withSelector": true,
     "withUseActions": true,
     "useModelDirectories": false,
-    "withExtraReducers": true
+    "withExtraReducers": false
   }
 }
